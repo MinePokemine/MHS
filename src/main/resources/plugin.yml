@@ -1,0 +1,53 @@
+name: MHS
+version: '1.0'
+main: com.minepokemine.mhs.PluginMHS
+api-version: '26.1'
+authors: [ MinePokemine ]
+
+load: STARTUP
+default-permission: notop
+
+libraries:
+  - com.google.code.gson:gson:2.14.0
+
+depend:
+  - Vault
+
+softdepend:
+  - ViaVersion
+
+permissions:
+  permission.player:
+    description: "A normal player"
+    default: notop
+
+  permission.admin:
+    description: "An admin"
+    default: op
+
+commands:
+  mhs:
+    description: "Manage the MHS currency. \n Subcommands: 
+      /mhs gift [Player] [Amount]: Gives a specified player the specified amount of coins from you
+      /mhs reload [Player]: Reloads their max health, applies changes caused by means other than death (AH, /trade, /mhs gift, etc.)
+      /mhs reload: Reloads all players
+      /mhs save: Saves players' balances to a file so they will persist when the server turns off"
+    usage: "Usage: /<command> [gift|reload|save]"
+    aliases:
+      - lifesteal
+      - maxhealth
+
+  mhsop:
+    description: "Admins, manage the MHS currency \n Subcommands:
+      /mhsop add [Player] [Amount]: Adds the amount to the player's balance
+      /mhsop subtract [Player] [Amount]: Subtracts the amount from the player's balance,
+      /mhsop set [Player] [Amount]: Sets the player's balance to the amount,
+      /mhsop load: Loads players' balances from the file. Will undo all changes that have been done since the last save"
+    usage: "Usage: /<command> [add|subtract|set|load]"
+    permission: permission.admin
+    aliases:
+      - mhs_op
+      - lifesteal_op
+      - lifestealop
+      - maxhealth_op
+      - maxhealthop

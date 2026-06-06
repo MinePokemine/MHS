@@ -1,0 +1,19 @@
+healthLimit:
+  max: 40
+  min: 6
+
+MH$perMaxHealth: 1000
+startingMH$: 20000
+
+shouldSpectateBelowMinMH$: false
+lifestealMH$: 1000
+defaultGameMode: 0
+
+saveTries: 4
+
+message:
+  negativeGift: "You can't steal"
+
+scoreboard:
+  enabled: true
+  title: "AVS School Server"
