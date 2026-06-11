@@ -177,9 +177,9 @@ public final class PluginMHS extends JavaPlugin implements Listener {
             Player victim = event.getPlayer();
             logger.info("Player " + victim.getName() + " killed by " + killer.getName() + " in world " + victim.getWorld().getName());
 
-            int change = getConfig().getInt("worlds." + victim.getWorld().getName() + ".lifestealMH$", -1);
+            int change = getConfig().getInt("lifestealMH$", -1);
             if (change == -1) {
-                change = getConfig().getInt("worlds._default.lifestealMH$");
+                return;
             }
 
             EconomyResponse resp1 = economyModern.withdraw(getName(), victim.getUniqueId(), BigDecimal.valueOf(change));
@@ -220,10 +220,10 @@ public final class PluginMHS extends JavaPlugin implements Listener {
         int max_mh$ = getConfig().getInt("healthLimit.max") * getConfig().getInt("MH$perMaxHealth");
         if (health != null) {
             if (mh$.intValue() < min_mh$) {
-                if (getConfig().getBoolean("canPlayBelowMin")) {
-                    health.setBaseValue(getConfig().getInt("healthLimit.min"));
-                } else {
+                if (getConfig().getBoolean("shouldSpectateBelowMinMH$")) {
                     plr.setGameMode(GameMode.SPECTATOR);
+                } else {
+                    health.setBaseValue(getConfig().getInt("healthLimit.min"));
                 }
             }
             else if (mh$.intValue() > max_mh$) {
