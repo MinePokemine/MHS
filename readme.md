@@ -1,5 +1,9 @@
-MH$
-===
+<p align="center">
+  <img src="MH$_1.png" alt="Logo" width=128 image-rendering="pixelated" style="image-rendering: pixelated;">
+</p>
+
+<h1 align="center"> MH$ </h1>
+
 *By MinePokemine*
 
 This Spigot/Paper plugin adds a currency called MH$ to Minecraft. It works like any other currency. You can use it with any mods that work with currency.
