@@ -36,7 +36,7 @@ public class OpCommands implements CommandExecutor {
                     return true;
                 }
                 PluginMHS.instance.economyModern.deposit(PluginMHS.instance.getName(), reciever.getUniqueId(), value);
-                Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "/mhs reload");
+                BaseCommands.reloadPlayer(reciever);
                 return true;
 
             case "subtract", "take", "remove", "decrease":
@@ -59,7 +59,7 @@ public class OpCommands implements CommandExecutor {
                     return true;
                 }
                 PluginMHS.instance.economyModern.withdraw(PluginMHS.instance.getName(), reciever2.getUniqueId(), value2);
-                Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "/mhs reload");
+                BaseCommands.reloadPlayer(reciever2);
                 return true;
 
             case "set", "setbalance", "setbal", "setmhs", "setmh$":
@@ -82,7 +82,7 @@ public class OpCommands implements CommandExecutor {
                     return true;
                 }
                 PluginMHS.instance.economyModern.set(PluginMHS.instance.getName(), reciever3.getUniqueId(), value3);
-                Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "/mhs reload");
+                BaseCommands.reloadPlayer(reciever3);
                 return true;
 
             case "load":

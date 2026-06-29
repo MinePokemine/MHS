@@ -39,9 +39,10 @@ public class Modern implements Economy {
         BigDecimal prevAmt = balance(pluginName, accountID);
 
         if (prevAmt.add(amount).signum() == -1) {
-            return new EconomyResponse(
+            /*return new EconomyResponse(
                     BigDecimal.ZERO, BigDecimal.valueOf(PluginMHS.instance.economyAmount.get(accountID.toString()).balance),
-                    EconomyResponse.ResponseType.FAILURE, "Withdrawal would set balance at negative number" );
+                    EconomyResponse.ResponseType.FAILURE, "Withdrawal would set balance at negative number" );*/
+            return set(pluginName, accountID, BigDecimal.ZERO);
         }
 
         return set(pluginName, accountID, prevAmt.add(amount));
@@ -107,9 +108,10 @@ public class Modern implements Economy {
         BigDecimal prevAmt = BigDecimal.valueOf(PluginMHS.instance.economyAmount.get(accountID.toString()).balance);
 
         if (prevAmt.subtract(amount).signum() == -1) {
-            return new EconomyResponse(
+            /*return new EconomyResponse(
                     BigDecimal.ZERO, BigDecimal.valueOf(PluginMHS.instance.economyAmount.get(accountID.toString()).balance),
-                    EconomyResponse.ResponseType.FAILURE, "Withdrawal would set balance at negative number");
+                    EconomyResponse.ResponseType.FAILURE, "Withdrawal would set balance at negative number");*/
+            return set(pluginName, accountID, BigDecimal.ZERO);
         }
 
         return set(pluginName, accountID, prevAmt.subtract(amount));

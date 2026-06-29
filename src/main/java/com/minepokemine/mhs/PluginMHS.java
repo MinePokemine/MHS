@@ -188,15 +188,15 @@ public final class PluginMHS extends JavaPlugin implements Listener {
                 return;
             }
 
-            EconomyResponse resp2 = economyModern.deposit (getName(), killer.getUniqueId(), BigDecimal.valueOf(change));
+            EconomyResponse resp2 = economyModern.deposit(getName(), killer.getUniqueId(), BigDecimal.valueOf(change));
             if (!resp2.transactionSuccess()) {
                 logger.warning("Could not add money to killer " + killer.getName() + ". " + resp1.errorMessage);
                 economyModern.set(getName(), victim.getUniqueId(), resp1.balance.add(resp1.amount));
                 return;
             }
 
-            setPlayerHealth(victim, economyModern.balance(getName(), victim.getUniqueId()));
-            setPlayerHealth(killer, economyModern.balance(getName(), victim.getUniqueId()));
+            BaseCommands.reloadPlayer(victim);
+            BaseCommands.reloadPlayer(killer);
         }
     }
 
@@ -233,5 +233,7 @@ public final class PluginMHS extends JavaPlugin implements Listener {
                 health.setBaseValue(mh$.doubleValue() / getConfig().getInt("MH$perMaxHealth"));
             }
         }
+
+
     }
 }

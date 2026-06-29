@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -46,7 +47,8 @@ public class BaseCommands implements CommandExecutor {
                         if (PluginMHS.instance.economyModern.withdraw(PluginMHS.instance.getName(), gifter.getUniqueId(), value).transactionSuccess()) {
                             PluginMHS.instance.economyModern.deposit(PluginMHS.instance.getName(), reciever.getUniqueId(), value);
                         }
-
+                        BaseCommands.reloadPlayer(gifter);
+                        BaseCommands.reloadPlayer(reciever);
                     }
                 }
                 Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "/mhs reload");
@@ -57,23 +59,24 @@ public class BaseCommands implements CommandExecutor {
                     PluginMHS.instance.economyAmount.getAll().forEach((uuid, acc) -> {
                         org.bukkit.entity.Player plr = Bukkit.getPlayer(UUID.fromString(uuid));
                         if (plr != null) {
-                            PluginMHS.instance.setPlayerHealth(plr, PluginMHS.instance.economyModern.getBalance(PluginMHS.instance.getName(), plr.getUniqueId()));
+                            reloadPlayer(plr);
                         }
                     });
                     return true;
                 }
 
                 else {
-                    org.bukkit.entity.Player target = Bukkit.getPlayer(args[1]);
+                    Player target = Bukkit.getPlayer(args[1]);
                     if (target == null) {
                         sender.sendMessage("Usage: /" + command.getName() + " " + args[0] + " or /" + command.getName() + " " + args[0] + " [Player]");
                         return true;
                     }
 
-                    PluginMHS.instance.setPlayerHealth(target, PluginMHS.instance.economyModern.balance(PluginMHS.instance.getName(), target.getUniqueId()));
+                    reloadPlayer(target);
                 }
 
             case "save":
+                PluginMHS.instance.logger.warning("Hello");
                 try {
                     PluginMHS.instance.economyAmount.save();
                 }
@@ -86,5 +89,9 @@ public class BaseCommands implements CommandExecutor {
             default:
                 return false;
         }
+    }
+
+    public static void reloadPlayer(Player plr) {
+        PluginMHS.instance.setPlayerHealth(plr, PluginMHS.instance.economyModern.balance(PluginMHS.instance.getName(), plr.getUniqueId()));
     }
 }
